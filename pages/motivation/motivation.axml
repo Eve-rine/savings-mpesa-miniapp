@@ -25,9 +25,9 @@
     <text>Refresh Quotes</text>
   </view>
 
-  <view class="tabs">
+  <!-- <view class="tabs">
     <view class="tab {{activeTab === 'goals' ? 'tab-active' : ''}}" data-tab="goals" onTap="onTabChange">Goals</view>
     <view class="tab {{activeTab === 'tips' ? 'tab-active' : ''}}" data-tab="tips" onTap="onTabChange">Tips</view>
     <view class="tab {{activeTab === 'quotes' ? 'tab-active' : ''}}" data-tab="quotes" onTap="onTabChange">Quotes</view>
-  </view>
+  </view> -->
 </view>
