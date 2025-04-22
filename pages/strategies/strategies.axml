@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">Savings Strategies</text>
+    <view class="back-button" onTap="onBack">
+      <icon type="left" size="20" color="#999" />
+    </view>
+  </view>
+
+  <view class="strategy-list">
+    <view class="strategy-card card">
+      <view class="strategy-icon-container" style="background-color: #E8F5FF;">
+        <image class="strategy-icon" src="/assets/icons/automate.png" mode="aspectFit" />
+      </view>
+      <view class="strategy-content">
+        <text class="strategy-title">Automate Savings</text>
+        <text class="strategy-description">Set up automatic transfers to your savings accounts on payday.</text>
+        <button class="strategy-button" onTap="onSetupAutomaticTap">Learn More</button>
+      </view>
+    </view>
+
+    <view class="strategy-card card">
+      <view class="strategy-icon-container" style="background-color: #FFECE8;">
+        <image class="strategy-icon" src="/assets/icons/expense.png" mode="aspectFit" />
+      </view>
+      <view class="strategy-content">
+        <text class="strategy-title">Cut Daily Expenses</text>
+        <text class="strategy-description">Track and reduce your daily spending to save more money.</text>
+        <button class="strategy-button" onTap="onTrackExpensesTap">Learn More</button>
+      </view>
+    </view>
+
+    <view class="strategy-card card">
+      <view class="strategy-icon-container" style="background-color: #FFF8E8;">
+        <image class="strategy-icon" src="/assets/icons/income.png" mode="aspectFit" />
+      </view>
+      <view class="strategy-content">
+        <text class="strategy-title">Find Extra Income</text>
+        <text class="strategy-description">Explore ways to earn additional income to boost your savings.</text>
+        <button class="strategy-button" onTap="onExtraIncomeTap">Learn More</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{activeTab === 'goals' ? 'tab-active' : ''}}" data-tab="goals" onTap="onTabChange">Goals</view>
+    <view class="tab {{activeTab === 'tips' ? 'tab-active' : ''}}" data-tab="tips" onTap="onTabChange">Tips</view>
+    <view class="tab {{activeTab === 'settings' ? 'tab-active' : ''}}" data-tab="settings" onTap="onTabChange">Settings</view>
+  </view>
+</view>

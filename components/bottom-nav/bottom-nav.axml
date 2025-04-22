@@ -1,0 +1,5 @@
+<view class="tab-dots">
+  <view class="dot {{props.current === 0 ? 'active' : ''}}"></view>
+  <view class="dot {{props.current === 1 ? 'active' : ''}}"></view>
+  <view class="dot {{props.current === 2 ? 'active' : ''}}"></view>
+</view>

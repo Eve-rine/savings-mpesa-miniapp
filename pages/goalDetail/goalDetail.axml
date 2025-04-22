@@ -1,0 +1,145 @@
+<view class="container">
+  <block a:if="{{loading}}">
+    <view class="loading-spinner">
+      <am-loading type="spin" color="#F9B659" />
+    </view>
+  </block>
+  
+  <block a:else>
+    <view class="header">
+      <text class="header-title">{{goal.name}}</text>
+      <view class="menu-button" onTap="onMenuTap">
+        <icon type="more" size="24" color="#666" />
+      </view>
+    </view>
+    
+    <view class="goal-card card">
+      <view class="goal-amount">
+        <text class="target-label">Goal: </text>
+        <text class="target-amount">KES {{goal.target}}</text>
+      </view>
+      
+      <view class="current-status">
+        <text class="current-amount">KES {{goal.current}}</text>
+        <text class="percentage">{{goal.percentage}}%</text>
+      </view>
+      
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{goal.percentage > 100 ? 100 : goal.percentage}}%;"></view>
+      </view>
+      
+      <view class="goal-date">
+        <text>Target date: {{goal.targetDate}}</text>
+      </view>
+    </view>
+    
+    <view class="action-buttons">
+      <view class="action-button add" onTap="onAddTap">
+        <text>Add</text>
+      </view>
+      <view class="action-button withdraw" onTap="onWithdrawTap">
+        <text>Withdraw</text>
+      </view>
+    </view>
+    
+    <view class="section-header">
+      <text>Recent Activity</text>
+    </view>
+    
+    <view class="activity-list card">
+      <block a:if="{{activities.length === 0}}">
+        <view class="empty-activity">
+          <text>No recent activities for this goal.</text>
+        </view>
+      </block>
+      
+      <block a:else>
+        <view a:for="{{activities}}" a:key="{{index}}" class="activity-item">
+          <view class="activity-indicator" style="background-color: {{item.type === 'add' ? '#4CAF50' : '#FF4351'}};"></view>
+          <text class="activity-text">{{item.text}}</text>
+          <text class="activity-date">{{item.date}}</text>
+        </view>
+      </block>
+    </view>
+    
+    <view class="goal-info card">
+      <view class="info-item">
+        <text class="info-label">Category</text>
+        <text class="info-value">{{goal.category}}</text>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">Started</text>
+        <text class="info-value">{{goal.startDate}}</text>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">Money needed</text>
+        <text class="info-value">KES {{goal.target - goal.current > 0 ? goal.target - goal.current : 0}}</text>
+      </view>
+    </view>
+    
+    <block a:if="{{goal.percentage >= 100}}">
+      <view class="close-goal-button" onTap="onCloseGoalTap">
+        <text>Close Goal</text>
+      </view>
+    </block>
+  </block>
+</view>
+
+<!-- Add Money Modal -->
+<view class="modal" a:if="{{showAddModal}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">Add to {{goal.name}}</text>
+      <view class="modal-close" onTap="closeModals">
+        <icon type="close" size="20" color="#999" />
+      </view>
+    </view>
+    
+    <view class="modal-body">
+      <view class="input-group">
+        <text class="input-label">Amount (KES)</text>
+        <input class="input" type="digit" value="{{addAmount}}" onInput="onAddAmountInput" focus="{{showAddModal}}" />
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <view class="secondary-button" onTap="closeModals">
+        <text>Cancel</text>
+      </view>
+      <view class="primary-button" onTap="confirmAdd">
+        <text>Add</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- Withdraw Money Modal -->
+<view class="modal" a:if="{{showWithdrawModal}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">Withdraw from {{goal.name}}</text>
+      <view class="modal-close" onTap="closeModals">
+        <icon type="close" size="20" color="#999" />
+      </view>
+    </view>
+    
+    <view class="modal-body">
+      <view class="input-group">
+        <text class="input-label">Amount (KES)</text>
+        <input class="input" type="digit" value="{{withdrawAmount}}" onInput="onWithdrawAmountInput" focus="{{showWithdrawModal}}" />
+      </view>
+      <text class="error-text" a:if="{{withdrawError}}">{{withdrawError}}</text>
+    </view>
+    
+    <view class="modal-footer">
+      <view class="secondary-button" onTap="closeModals">
+        <text>Cancel</text>
+      </view>
+      <view class="primary-button" onTap="confirmWithdraw">
+        <text>Withdraw</text>
+      </view>
+    </view>
+  </view>
+</view>

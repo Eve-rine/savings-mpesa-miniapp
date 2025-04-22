@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/createGoal/createGoal",
+    "pages/error/error",
+    "pages/strategies/strategies",
+    "pages/goalDetail/goalDetail",
+    "pages/motivation/motivation",
+    "pages/goalMenu/goalMenu"
+    ],
+  "window": {
+    "defaultTitle": "Savings App",
+    "titleBarColor": "#FFB52E",
+    "backgroundColor": "#F8F8F8",
+    "pullRefresh": true
+  },
+  "tabBar": {
+    "textColor": "#999999",
+    "selectedColor": "#FF4B81",
+    "backgroundColor": "#FFFFFF",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "Goals",
+        "icon": "assets/icons/goals-icon.png",
+        "activeIcon": "assets/icons/goals-icon-active.png"
+      },
+      {
+        "pagePath": "pages/strategies/strategies",
+        "name": "Tips",
+        "icon": "assets/icons/tips-icon.png",
+        "activeIcon": "assets/icons/tips-icon-active.png"
+      },
+      {
+        "pagePath": "pages/motivation/motivation",
+        "name": "Quotes",
+        "icon": "assets/icons/quotes-icon.png",
+        "activeIcon": "assets/icons/quotes-icon-active.png"
+      }
+    ]
+  }
+}

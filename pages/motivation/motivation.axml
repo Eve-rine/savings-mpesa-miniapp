@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">Daily Motivation</text>
+    <view class="back-button" onTap="onBack">
+      <icon type="left" size="20" color="#999" />
+    </view>
+  </view>
+
+  <view class="quote-card">
+    <text class="quote-text">"A penny saved is a penny earned."</text>
+    <text class="quote-author">— Benjamin Franklin</text>
+  </view>
+
+  <view class="quote-card">
+    <text class="quote-text">"Financial freedom is available to those who learn about it and work for it."</text>
+    <text class="quote-author">— Robert Kiyosaki</text>
+  </view>
+
+  <view class="motivation-tip card">
+    <text class="tip-title">Tip of the Day</text>
+    <text class="tip-content">Create a vision board with images of what you're saving for. Visual reminders can boost your motivation to save.</text>
+  </view>
+
+  <view class="primary-button" onTap="onRefreshTap">
+    <text>Refresh Quotes</text>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{activeTab === 'goals' ? 'tab-active' : ''}}" data-tab="goals" onTap="onTabChange">Goals</view>
+    <view class="tab {{activeTab === 'tips' ? 'tab-active' : ''}}" data-tab="tips" onTap="onTabChange">Tips</view>
+    <view class="tab {{activeTab === 'quotes' ? 'tab-active' : ''}}" data-tab="quotes" onTap="onTabChange">Quotes</view>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+.tab-dots {
+  position: fixed;
+  bottom: 35px; 
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20%;
+  z-index: 100;
+  pointer-events: none; 
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #DDDDDD;
+}
+
+.dot.active {
+  background-color: #FF4B81;
+}

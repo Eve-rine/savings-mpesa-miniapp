@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">Create New Goal</text>
+    <view class="back-button" onTap="onBack">
+      <icon type="close" size="20" color="#999" />
+    </view>
+  </view>
+
+  <view class="form">
+    <view class="input-group">
+      <text class="input-label">Goal Name</text>
+      <input class="input" value="{{name}}" onInput="onNameInput" placeholder="e.g., New Phone" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">Target Amount (KES)</text>
+      <input class="input" type="digit" value="{{target}}" onInput="onTargetInput" placeholder="e.g., 50,000" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">Initial Deposit (Optional)</text>
+      <input class="input" type="digit" value="{{current}}" onInput="onCurrentInput" placeholder="e.g., 0" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">Target Date</text>
+      <picker
+        mode="date"
+        value="{{targetDate}}"
+        start="{{today}}"
+        end="2030-12-31"
+        onChange="onTargetDateChange"
+      >
+        <view class="picker">
+          <text a:if="{{!targetDate}}">Select date</text>
+          <text a:else>{{targetDate}}</text>
+          <icon type="down" size="18" color="#999" />
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">Category</text>
+      <picker
+        value="{{categoryIndex}}"
+        range="{{categories}}"
+        onChange="onCategoryChange"
+      >
+        <view class="picker">
+          <text a:if="{{categoryIndex === -1}}">Select category</text>
+          <text a:else>{{categories[categoryIndex]}}</text>
+          <icon type="down" size="18" color="#999" />
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">Optional Image</text>
+      <view class="upload-button" onTap="onUploadTap">
+        <text>Tap to upload</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-group">
+    <view class="primary-button {{isFormValid ? '' : 'disabled-button'}}" onTap="onSaveGoal">
+      <text>Save Goal</text>
+    </view>
+  </view>
+</view>

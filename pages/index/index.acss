@@ -1,0 +1,94 @@
+.container {
+  padding: 16px;
+  background-color: #F8F8F8;
+  min-height: 100vh;
+}
+
+.search-container {
+  width: 85vw;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.search-text {
+  margin-left: 10px;
+  color: #999;
+}
+
+.loading-container, .error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.retry-button {
+  margin-top: 16px;
+  background-color: #FFB52E;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+.goals-list {
+  margin-bottom: 70px;
+}
+
+.goal-item {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.goal-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.menu-icon {
+  font-size: 18px;
+  color: #999;
+}
+
+.goal-amount {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.goal-percentage {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 40px;
+  left: 16px;
+  right: 16px;
+  background-color: #FFB52E;
+  color: white;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

@@ -1,0 +1,55 @@
+.strategy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.strategy-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+}
+
+.strategy-icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.strategy-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.strategy-content {
+  flex: 1;
+}
+
+.strategy-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.strategy-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.strategy-button {
+  background: none;
+  border: none;
+  color: #FF4351;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  text-align: left;
+}

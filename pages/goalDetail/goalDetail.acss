@@ -1,0 +1,173 @@
+.goal-card {
+  padding: 24px;
+}
+
+.goal-amount {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.target-label {
+  font-size: 16px;
+  color: #666;
+}
+
+.target-amount {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.current-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.current-amount {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.percentage {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FF4351;
+}
+
+.goal-date {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #999;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.action-button {
+  flex: 1;
+  height: 48px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.action-button.add {
+  background-color: #FF4351;
+  color: white;
+}
+
+.action-button.withdraw {
+  background-color: white;
+  border: 1px solid #FF4351;
+  color: #FF4351;
+}
+
+.section-header {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 24px 0 16px;
+  color: #333;
+}
+
+.empty-activity {
+  padding: 16px 0;
+  text-align: center;
+  color: #999;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.close-goal-button {
+  margin-top: 24px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: #F7F7F7;
+  border: 1px solid #EEEEEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #FF4351;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 300px;
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.modal-footer {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modal-footer .primary-button,
+.modal-footer .secondary-button {
+  flex: 1;
+  margin: 0;
+}

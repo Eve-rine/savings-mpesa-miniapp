@@ -1,0 +1,6 @@
+.tea
+.DS_Store
+node_modules
+.eslintcache
+.mini-ide-tiny_app_ide_intl_poc_mac
+.mini-ide-tiny_app_ide_intl_poc_windows

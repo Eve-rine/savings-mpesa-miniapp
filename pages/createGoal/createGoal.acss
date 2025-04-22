@@ -1,0 +1,29 @@
+.disabled-button {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.picker {
+  background-color: #F7F7F7;
+  border-radius: 8px;
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upload-button {
+  background-color: #F7F7F7;
+  border-radius: 8px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.button-group {
+  margin-top: 24px;
+}

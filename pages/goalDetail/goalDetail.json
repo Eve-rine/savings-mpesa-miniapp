@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Goal Details",
+  "usingComponents": {
+    "am-loading": "antd-mini/es/Loading/index"
+  }
+}

@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="error-container">
+    <image class="error-icon" src="/assets/icons/error.png" mode="aspectFit" />
+    <text class="error-title">Error Occurred</text>
+    <text class="error-message">Error fetching your saving goals data. Please try again.</text>
+    <view class="primary-button" onTap="onRetry">
+      <text>Retry</text>
+    </view>
+  </view>
+</view>
