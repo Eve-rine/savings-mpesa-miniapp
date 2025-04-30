@@ -1,6 +1,5 @@
 // Implementation for MockAPI.io
 
-// Base URL for the API
 const API_BASE_URL = 'https://6804146579cb28fb3f5a50d0.mockapi.io/savings/api';
 
 // Fetch all goals
@@ -104,14 +103,11 @@ function updateGoal(id, updatedData) {
   return new Promise((resolve, reject) => {
     fetchGoalById(id)
       .then(currentGoal => {
-        // Determine current and target values
         const current = updatedData.current !== undefined ? Number(updatedData.current) : currentGoal.current;
         const target = updatedData.target !== undefined ? Number(updatedData.target) : currentGoal.target;
         
-        // Calculate new percentage
         const percentage = target > 0 ? Math.floor((current / target) * 100) : 0;
         
-        // Create updated goal data
         const goalWithPercentage = { 
           ...updatedData, 
           current,
@@ -155,10 +151,8 @@ function updateGoal(id, updatedData) {
 // Add contribution to a goal
 function addContribution(id, amount) {
   return new Promise((resolve, reject) => {
-    // First get the current goal
     fetchGoalById(id)
       .then(goal => {
-        // Calculate new values
         const newCurrent = goal.current + Number(amount);
         const percentage = goal.target > 0 ? Math.floor((newCurrent / goal.target) * 100) : 0;
 
