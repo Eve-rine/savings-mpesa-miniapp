@@ -5,8 +5,7 @@
     "pages/error/error",
     "pages/strategies/strategies",
     "pages/goalDetail/goalDetail",
-    "pages/motivation/motivation",
-    "pages/goalMenu/goalMenu"
+    "pages/motivation/motivation"
     ],
   "window": {
     "defaultTitle": "Savings App",

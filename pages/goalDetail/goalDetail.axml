@@ -1,7 +1,9 @@
 <view class="container">
   <block a:if="{{loading}}">
-    <view class="loading-spinner">
-      <am-loading type="spin" color="#F9B659" />
+    <view class="loading-container">
+      <view class="loading-spinner">
+        <am-loading type="spin" color="#F9B659" />
+      </view>
     </view>
   </block>
   
@@ -35,7 +37,7 @@
     
     <view class="action-buttons">
       <view class="action-button add" onTap="onAddTap">
-        <text>Add</text>
+        <text>Deposit</text>
       </view>
       <view class="action-button withdraw" onTap="onWithdrawTap">
         <text>Withdraw</text>
@@ -80,8 +82,9 @@
     </view>
     
     <block a:if="{{goal.percentage >= 100}}">
+      <!-- <block > -->
       <view class="close-goal-button" onTap="onCloseGoalTap">
-        <text>Close Goal</text>
+        <text>Delete Goal</text>
       </view>
     </block>
   </block>

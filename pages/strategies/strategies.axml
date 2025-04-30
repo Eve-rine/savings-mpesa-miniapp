@@ -1,10 +1,10 @@
 <view class="container">
-  <view class="header">
+  <!-- <view class="header">
     <text class="header-title">Savings Strategies</text>
     <view class="back-button" onTap="onBack">
       <icon type="left" size="20" color="#999" />
     </view>
-  </view>
+  </view> -->
 
   <view class="strategy-list">
     <view class="strategy-card card">
@@ -23,8 +23,8 @@
         <image class="strategy-icon" src="/assets/icons/expense.png" mode="aspectFit" />
       </view>
       <view class="strategy-content">
-        <text class="strategy-title">Cut Daily Expenses</text>
-        <text class="strategy-description">Track and reduce your daily spending to save more money.</text>
+        <text class="strategy-title">Cut Daily Expenses </text>
+        <text class="strategy-description"> Track and reduce your daily spending to save more money.</text>
         <button class="strategy-button" onTap="onTrackExpensesTap">Learn More</button>
       </view>
     </view>
@@ -41,9 +41,9 @@
     </view>
   </view>
 
-  <view class="tabs">
+  <!-- <view class="tabs">
     <view class="tab {{activeTab === 'goals' ? 'tab-active' : ''}}" data-tab="goals" onTap="onTabChange">Goals</view>
     <view class="tab {{activeTab === 'tips' ? 'tab-active' : ''}}" data-tab="tips" onTap="onTabChange">Tips</view>
     <view class="tab {{activeTab === 'settings' ? 'tab-active' : ''}}" data-tab="settings" onTap="onTabChange">Settings</view>
-  </view>
+  </view> -->
 </view>

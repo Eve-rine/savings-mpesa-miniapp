@@ -1,47 +1,49 @@
 <view class="container">
-  <view class="header">
-    <text class="header-title">Savings Goals</text>
-    <view onTap="onSearchTap" class="search-icon">
+  <view class="search-container">
+    <view class="search-icon">
       <icon type="search" size="20" color="#999" />
     </view>
+    <input class="search-input" placeholder="Search goals" onInput="onSearchInput" value="{{searchQuery}}" />
   </view>
 
-  <block a:if="{{loading}}">
-    <view class="loading-spinner">
-      <am-loading type="spin" color="#F9B659" />
-    </view>
-  </block>
-  
-  <block a:elif="{{goals.length === 0}}">
-    <view class="empty-state">
-      <image class="empty-state-icon" src="/assets/icons/piggy-bank.png" mode="aspectFit" />
-      <text class="empty-state-text">No savings goals yet. Get started by creating a new goal!</text>
-    </view>
-  </block>
-
-  <block a:else>
-    <view class="goals-list">
-      <view a:for="{{goals}}" a:key="{{item.id}}" class="card goal-card" data-id="{{item.id}}" onTap="onGoalTap">
-        <view class="list-item-header">
-          <text class="list-item-title">{{item.name}}</text>
-          <text class="list-item-amount">{{item.percentage}}%</text>
-        </view>
-        <view class="amount-text">
-          <text class="current-amount">KES {{item.current}}</text>
-          <text class="target-amount"> / KES {{item.target}}</text>
-        </view>
-        <view class="progress-bar">
-          <view class="progress-fill" style="width: {{item.percentage > 100 ? 100 : item.percentage}}%;"></view>
+  <scroll-view class="content-area" scroll-y="true">
+    <block a:if="{{loading}}">
+      <view class="loading-container">
+        <view class="loading-spinner">
+          <am-loading type="spin" color="#F9B659" />
         </view>
       </view>
-    </view>
-  </block>
+    </block>
 
-  <view class="primary-button" onTap="onNewGoalTap">
-    <text>+ New Goal</text>
+    <block a:elif="{{goals.length === 0}}">
+      <view class="empty-state">
+        <image class="empty-state-icon" src="/assets/icons/piggy-bank.png" mode="aspectFit" />
+        <text class="empty-state-text">No savings goals yet. Get started by creating a new goal!</text>
+      </view>
+    </block>
+
+    <block a:else>
+      <view class="goals-list">
+        <view a:for="{{goals}}" a:key="{{item.id}}" class="card goal-card" data-id="{{item.id}}" onTap="onGoalTap">
+          <view class="list-item-header">
+            <text class="list-item-title">{{item.name}}</text>
+            <text class="list-item-amount">{{item.percentage}}%</text>
+          </view>
+          <view class="amount-text">
+            <text class="current-amount">KES {{item.current}}</text>
+            <text class="target-amount"> / KES {{item.target}}</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{item.percentage > 100 ? 100 : item.percentage}}%;"></view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="footer-button" a:if="{{!loading}}">
+    <antd-button type="warning" class="primary-button" block onTap="onNewGoalTap">
+      + New Goal
+    </antd-button>
   </view>
-
-  <!-- <bottom-nav current="0" /> -->
-
-  
 </view>

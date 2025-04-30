@@ -1,4 +1,3 @@
-// pages/createGoal/createGoal.js
 const { createGoal, fetchCategories } = require('../../services/api');
 
 Page({
@@ -15,7 +14,6 @@ Page({
   },
 
   onLoad() {
-    // Set today's date in YYYY-MM-DD format
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -26,10 +24,8 @@ Page({
       today: todayString
     });
     
-    // Fetch categories
     fetchCategories()
       .then(categories => {
-        // Format categories for display (capitalize first letter)
         const formattedCategories = categories.map(category => 
           category.charAt(0).toUpperCase() + category.slice(1)
         );
@@ -99,14 +95,6 @@ Page({
       this.validateForm();
     });
   },
-  
-  onUploadTap() {
-    my.showToast({
-      type: 'none',
-      content: 'Image upload feature coming soon',
-      duration: 1500
-    });
-  },
 
   onSaveGoal() {
     if (!this.validateForm()) {
@@ -151,7 +139,12 @@ Page({
           duration: 1500
         });
         
-        my.navigateBack();
+        setTimeout(() => {
+          my.reLaunch({
+            url: '/pages/index/index'
+          });
+        }, 1500);
+        // my.navigateBack();
       })
       .catch(error => {
         console.error('Error creating goal:', error);

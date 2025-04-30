@@ -1,4 +1,4 @@
-// services/api.js - Implementation for MockAPI.io
+// Implementation for MockAPI.io
 
 // Base URL for the API
 const API_BASE_URL = 'https://6804146579cb28fb3f5a50d0.mockapi.io/savings/api';
@@ -57,14 +57,11 @@ function fetchGoalById(id) {
   });
 }
 
-// Create a new goal
 function createGoal(goalData) {
   return new Promise((resolve, reject) => {
-    // Ensure numeric fields are numbers
     const current = Number(goalData.current || 0);
     const target = Number(goalData.target || 0);
     
-    // Calculate percentage
     const percentage = target > 0 ? Math.floor((current / target) * 100) : 0;
     
     const goalWithPercentage = { 
@@ -103,10 +100,8 @@ function createGoal(goalData) {
   });
 }
 
-// Update an existing goal
 function updateGoal(id, updatedData) {
   return new Promise((resolve, reject) => {
-    // First get the current goal to calculate percentage correctly
     fetchGoalById(id)
       .then(currentGoal => {
         // Determine current and target values
@@ -166,8 +161,7 @@ function addContribution(id, amount) {
         // Calculate new values
         const newCurrent = goal.current + Number(amount);
         const percentage = goal.target > 0 ? Math.floor((newCurrent / goal.target) * 100) : 0;
-        
-        // Update the goal
+
         my.request({
           url: `${API_BASE_URL}/goals/${id}`,
           method: 'PUT',
@@ -229,7 +223,6 @@ function deleteGoal(id) {
 // Get goal categories
 function fetchCategories() {
   return new Promise((resolve) => {
-    // Since MockAPI doesn't support complex structures well, we're returning a hardcoded list
     resolve([
       'emergency',
       'travel',
@@ -244,74 +237,6 @@ function fetchCategories() {
   });
 }
 
-// Seed initial data
-function seedInitialData() {
-  return new Promise((resolve, reject) => {
-    // Check if we already have goals
-    fetchGoals()
-      .then(existingGoals => {
-        if (existingGoals.length === 0) {
-          const initialGoals = [
-            {
-              name: "Emergency Fund",
-              current: 12500,
-              target: 50000,
-              startDate: "2025-01-01",
-              targetDate: "2025-12-31",
-              category: "emergency"
-            },
-            {
-              name: "New Laptop",
-              current: 45000,
-              target: 90000,
-              startDate: "2025-02-15",
-              targetDate: "2025-07-15",
-              category: "electronics"
-            },
-            {
-              name: "Holiday Trip",
-              current: 30000,
-              target: 100000,
-              startDate: "2025-03-01",
-              targetDate: "2025-10-01",
-              category: "travel"
-            },
-            {
-              name: "Wedding Fund",
-              current: 150000,
-              target: 300000,
-              startDate: "2024-12-01",
-              targetDate: "2026-06-01",
-              category: "events"
-            }
-          ];
-          
-          // Create each goal sequentially
-          let promise = Promise.resolve();
-          initialGoals.forEach(goal => {
-            promise = promise.then(() => createGoal(goal));
-          });
-          
-          promise
-            .then(() => {
-              console.log('Initial data seeded successfully');
-              resolve();
-            })
-            .catch(error => {
-              reject(error);
-            });
-        } else {
-          resolve();
-        }
-      })
-      .catch(error => {
-        console.error('Error seeding initial data:', error);
-        reject(error);
-      });
-  });
-}
-
-// Export all functions
 module.exports = {
   fetchGoals,
   fetchGoalById,
@@ -320,5 +245,4 @@ module.exports = {
   addContribution,
   deleteGoal,
   fetchCategories,
-  seedInitialData
 };

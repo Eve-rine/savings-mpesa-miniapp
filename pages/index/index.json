@@ -3,6 +3,6 @@
   "pullRefresh": true,
   "usingComponents": {
     "am-loading": "antd-mini/es/Loading/index",
-    "bottom-nav": "/components/bottom-nav/bottom-nav"
+    "antd-button": "antd-mini/es/Button/index"
   }
 }

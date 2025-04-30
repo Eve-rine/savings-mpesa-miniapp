@@ -1,6 +1,10 @@
 .motivation-tip {
   margin: 16px 0 24px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .tip-title {

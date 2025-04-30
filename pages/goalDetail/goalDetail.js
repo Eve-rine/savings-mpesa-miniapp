@@ -1,4 +1,4 @@
-const { fetchGoalById, addContribution, updateGoal } = require('../../services/api');
+const { fetchGoalById, updateGoal,deleteGoal,addContribution } = require('../../services/api');
 
 Page({
   data: {
@@ -6,7 +6,6 @@ Page({
     goal: null,
     loading: true,
     activities: [],
-    // Modal states
     showAddModal: false,
     showWithdrawModal: false,
     addAmount: '',
@@ -42,7 +41,6 @@ Page({
     
     fetchGoalById(this.data.goalId)
       .then(goal => {
-        // Generate some mock activities for display
         const activities = this.generateMockActivities(goal);
         
         this.setData({
@@ -66,18 +64,15 @@ Page({
       });
   },
   
-  // Mock function to generate some activity data
   generateMockActivities(goal) {
     const activities = [];
     
-    // Add a "started goal" activity
     activities.push({
       type: 'add',
       text: `Started goal with KES ${this.formatCurrency(goal.current)}`,
       date: this.formatShortDate(goal.startDate)
     });
     
-    // Add some random activities based on the goal amount
     if (goal.current > goal.target * 0.3) {
       const amount = Math.floor(goal.target * 0.15);
       activities.push({
@@ -121,10 +116,40 @@ Page({
   },
   
   onCloseGoalTap() {
-    my.navigateTo({
-      url: `/pages/closeGoal/closeGoal?id=${this.data.goalId}`
+    const goalId = this.data.goalId;
+  
+    my.confirm({
+      title: 'Close Goal',
+      content: 'Are you sure you want to close and delete this goal?',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      success: (result) => {
+        if (result.confirm) {
+          deleteGoal(goalId)
+            .then(() => {
+              my.showToast({
+                type: 'success',
+                content: 'Goal closed successfully',
+                duration: 2000
+              });
+  
+              setTimeout(() => {
+                my.navigateBack();
+              }, 2000);
+            })
+            .catch((error) => {
+              console.error('Error closing goal:', error);
+              my.showToast({
+                type: 'fail',
+                content: 'Failed to close goal',
+                duration: 2000
+              });
+            });
+        }
+      }
     });
   },
+  
   
   closeModals() {
     this.setData({
@@ -139,14 +164,12 @@ Page({
     });
   },
   
-  // pages/goalDetail/goalDetail.js (continued)
   onWithdrawAmountInput(e) {
     this.setData({
       withdrawAmount: e.detail.value,
       withdrawError: ''
     });
     
-    // Validate withdraw amount
     const amount = parseFloat(e.detail.value);
     if (amount > this.data.goal.current) {
       this.setData({
@@ -166,41 +189,88 @@ Page({
       });
       return;
     }
-    
-    // Add contribution to the goal
-    addContribution(this.data.goalId, amount)
-      .then(updatedGoal => {
-        this.closeModals();
-        
-        // Add the activity to the list
-        const newActivity = {
-          type: 'add',
-          text: `Added KES ${this.formatCurrency(amount)}`,
-          date: 'Today'
-        };
-        
-        this.setData({
-          goal: updatedGoal,
-          activities: [newActivity, ...this.data.activities]
-        });
-        
-        my.showToast({
-          type: 'success',
-          content: 'Amount added successfully',
-          duration: 1500
-        });
-      })
-      .catch(error => {
-        console.error('Error adding amount:', error);
-        
-        my.showToast({
-          type: 'fail',
-          content: 'Failed to add amount',
-          duration: 2000
-        });
+
+try {
+  console.log('Initiating payment for amount:', amount);
+  console.log('goalid',this.data.goalId)
+  my.call("payBill", {
+    businessID: "1112223", 
+    billReference: this.data.goalId, // Using goal ID as reference
+    amount: amount.toString(),
+    currency: "KES",
+    reason: `Contribution to ${this.data.goal.name}`,
+    success: (res) => {
+      console.log('Payment success response:', JSON.stringify(res, null, 2));
+      this.handleSuccessfulPayment(amount, res);
+    },
+    fail: (res) => {
+      console.error('Payment failed:', JSON.stringify(res, null, 2));
+      let errorMsg = 'Payment failed';
+      
+      my.alert({
+        title: 'Payment Error',
+        content: `Error Code: ${res.error || 'Unknown'}\nMessage: ${errorMsg}\n\nFull Details: ${JSON.stringify(res, null, 2)}`,
+        buttonText: 'OK',
       });
-  },
+    },
+  });
+} catch (error) {
+  console.error('Error calling payment API:', error);
   
+  // Display detailed error information
+  my.alert({
+    title: 'Payment API Error',
+    content: `An error occurred while attempting to call the payment API:\n\n${error.message || error}\n\nStack: ${error.stack || 'Not available'}`,
+    buttonText: 'OK'
+  });
+}
+},
+
+handleSuccessfulPayment(amount, paymentResponse) {
+  addContribution(this.data.goalId, amount)
+    .then(updatedGoal => {
+      return updateGoal(this.data.goalId, {
+        lastContribution: {
+          amount: Number(amount),
+          date: new Date().toISOString(),
+          transactionId: paymentResponse.transactionId || null,
+          paymentMethod: 'PayBill',
+          status: 'completed'
+        }
+      });
+    })
+    .then(updatedGoal => {
+      this.closeModals();
+      
+      const newActivity = {
+        type: 'add',
+        text: `Added KES ${this.formatCurrency(amount)}`,
+        date: 'Today',
+        transactionId: paymentResponse.transactionId || 'Unknown'
+      };
+      
+      this.setData({
+        goal: updatedGoal,
+        activities: [newActivity, ...this.data.activities]
+      });
+      
+      my.showToast({
+        type: 'success',
+        content: 'Amount added successfully',
+        duration: 1500
+      });
+    })
+    .catch(error => {
+      console.error('Error adding amount:', error);
+      
+      my.showToast({
+        type: 'fail',
+        content: 'Failed to update goal',
+        duration: 2000
+      });
+    });
+},
+
   confirmWithdraw() {
     const amount = parseFloat(this.data.withdrawAmount);
     
